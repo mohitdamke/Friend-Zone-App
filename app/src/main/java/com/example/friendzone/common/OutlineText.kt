@@ -9,6 +9,7 @@ import androidx.compose.material.icons.rounded.Preview
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -53,7 +54,7 @@ fun OutlineText(
                 fontFamily = FontFamily.SansSerif, maxLines = 1
             )
         },
-        colors = TextFieldDefaults.outlinedTextFieldColors(
+        colors = OutlinedTextFieldDefaults.colors(
             focusedBorderColor = Black,
             unfocusedBorderColor = Black,
             focusedTextColor = Black,

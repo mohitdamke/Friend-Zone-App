@@ -104,7 +104,7 @@ fun OtherUsers(
                 ),
                 title = {
                     Text(
-                        text = users?.name?.toUpperCase(Locale.ROOT) ?: "Loading",
+                        text = users?.name?.uppercase(Locale.ROOT) ?: "Loading",
                         maxLines = 1,
                         letterSpacing = 1.sp, fontSize = TextDim.titleTextSize,
                         overflow = TextOverflow.Visible,
