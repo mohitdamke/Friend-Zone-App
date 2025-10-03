@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.friendzone"
+    namespace = "com.zone.friendzone"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.friendzone"
+        applicationId = "com.zone.friendzone"
         minSdk = 26
         //noinspection OldTargetApi
         targetSdk = 35
