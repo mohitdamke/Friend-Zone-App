@@ -1,15 +1,12 @@
 # FriendZone - Social Media App with Kotlin and Jetpack Compose
----
 
-I fixed formatting, improved readability, and corrected the email link. Let me know if you need any further refinements! 🚀
+Welcome to **FriendZone**, a modern social media app built with **Kotlin** and **Jetpack Compose**. This app leverages **Firebase** for authentication, storage, and real-time data management, offering a seamless and interactive user experience.  
 
-Welcome to **FriendZone**, a modern social media app built with **Kotlin** and **Jetpack Compose**. This app leverages **Firebase** for authentication, storage, and real-time data management, offering a seamless and interactive user experience. Below, you'll find all the details about the app, its features, installation steps, and more.
+Below, you’ll find all the details about the app, its features, installation steps, and more.
 
 ---
 
 ## Screenshots
-
-Here are some screenshots of the app:
 
 | Splash Screen | Home Screen | Profile Screen |
 |---------------|-------------|----------------|
@@ -22,6 +19,10 @@ Here are some screenshots of the app:
 | Other User Profile | AI Chat | Logout |
 |--------------------|---------|--------|
 | ![Other User Profile](https://github.com/user-attachments/assets/4b9f589e-247d-4f36-94b4-57b31b96a3d2) | ![AI Chat](https://github.com/user-attachments/assets/fa9b3f27-5320-4503-9c60-8c550a1682fd) | ![Logout](https://github.com/user-attachments/assets/ad646f35-9f0f-4a4f-a275-b0450dd35e73) |
+
+| Smart Reply Suggestions | Chat with Images |
+|------------------------|-----------------|
+| ![Smart Reply](https://github.com/user-attachments/assets/268b5651-6c2e-4096-a4b9-cc9f19508749) | ![Chat Images](https://github.com/user-attachments/assets/40a95285-ac71-4202-9f7c-00f91c337500) |
 
 ---
 
@@ -49,6 +50,8 @@ Here are some screenshots of the app:
 ### Chat Feature
 - **Chatting with Users**: Real-time chat functionality using Firebase Realtime Database.
 - **Integrate Gemini AI**: Enhance chat experience with Gemini AI integration.
+- **Smart Reply Suggestions**: AI-powered suggested replies based on conversation context.
+- **Send Images**: Upload and share images in chat.
 
 ### User Interface
 - **Good Looking UI**: Modern and engaging user interface built with Jetpack Compose.
@@ -65,66 +68,3 @@ Follow these steps to set up the project:
 1. **Clone the Repository**
    ```bash
    git clone https://github.com/yourusername/social-media-app.git
-   ```
-
-2. **Open the Project**
-   Open the project in Android Studio.
-
-3. **Add Firebase Configuration**
-   - Go to the [Firebase Console](https://console.firebase.google.com/).
-   - Create a new project (if you haven't already).
-   - Add your Android app to the project.
-   - Download the `google-services.json` file and place it in the `app` directory.
-
-4. **Sync Gradle**
-   - Sync Gradle by clicking on `Sync Now` in the top right corner of Android Studio.
-
-5. **Run the App**
-   - Select your device or emulator and run the app.
-
----
-
-## Usage
-
-1. **Login and Registration**
-   - Use the login screen to access existing accounts or register a new user.
-   
-2. **Create and Manage Posts**
-   - Create posts with text and images.
-   - Like, comment, and save posts.
-
-3. **Edit Profile**
-   - Update your profile information and settings.
-
-4. **View and Share Stories**
-   - Share stories and view stories from other users.
-
-5. **Chat with Users**
-   - Engage in real-time chat with other users and interact with Gemini AI.
-
----
-
-## Contributing
-
-We welcome contributions to the project! If you have suggestions or improvements, please follow these steps:
-
-1. **Fork the Repository**
-2. **Create a New Branch**
-3. **Make Your Changes**
-4. **Submit a Pull Request**
-
----
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-
----
-
-## Contact
-
-For any inquiries or issues, please contact us at [mohitrdamke@example.com](mailto:mohitrdamke@gmail.com).
-
----
-
-Thank you for checking out **FriendZone**! We hope you enjoy using the app as much as we enjoyed building it. 🚀
