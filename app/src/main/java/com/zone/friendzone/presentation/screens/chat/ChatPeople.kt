@@ -86,14 +86,19 @@ fun ChatPeople(
         chatViewModel.fetchMessages(chatId) // Fetch messages using chatId
         userViewModel.fetchChatMessages(chatId) // Fetch chat messages
     }
+
+    LaunchedEffect(chatMessages) {
+        chatViewModel.generateSmartReplies(chatMessages, currentUserId)
+    }
+
     Scaffold(topBar = {
         CenterAlignedTopAppBar(
-            colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+            colors = TopAppBarDefaults.topAppBarColors(
                 containerColor = DarkBlack,
-                titleContentColor = White,
-                actionIconContentColor = White,
-                navigationIconContentColor = White,
                 scrolledContainerColor = DarkBlack,
+                navigationIconContentColor = White,
+                titleContentColor = White,
+                actionIconContentColor = White
             ),
             title = {
                 Row(
@@ -149,27 +154,52 @@ fun ChatPeople(
 
             )
     }, bottomBar = {
-        ChatUserOutlineText(
-            modifier = modifier,
-            value = chatViewModel.currentMessage,
-            label = "Type a message",
-            onValueChange = {
-                chatViewModel.currentMessage = it
-            },
-            onSendClick = {
-                val newMessageRef = userViewModel.chatRef.child(chatId).push()
-                val storeKey = newMessageRef.key ?: return@ChatUserOutlineText
-                val message = ChatModel(
-                    senderId = currentUserId,
-                    receiverId = uid,
-                    messageText = chatViewModel.currentMessage,
-                    storeKey = storeKey,
-                    timestamp = System.currentTimeMillis()
-                )
-                userViewModel.sendMessage(chatId, message)
-                chatViewModel.currentMessage = ""
-            },
-        )
+        Column(modifier = Modifier.fillMaxWidth()) {
+            // 1️⃣ Smart Reply suggestions
+            if (chatViewModel.smartReplies.isNotEmpty()) {
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 10.dp, vertical = 4.dp)
+                ) {
+                    chatViewModel.smartReplies.forEach { suggestion ->
+                        Text(
+                            text = suggestion,
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(16.dp))
+                                .background(SocialBlue)
+                                .clickable {
+                                    chatViewModel.currentMessage = suggestion
+                                }
+                                .padding(horizontal = 12.dp, vertical = 8.dp),
+                            color = White
+                        )
+                    }
+                }
+            }
+            ChatUserOutlineText(
+                modifier = modifier,
+                value = chatViewModel.currentMessage,
+                label = "Type a message",
+                onValueChange = {
+                    chatViewModel.currentMessage = it
+                },
+                onSendClick = {
+                    val newMessageRef = userViewModel.chatRef.child(chatId).push()
+                    val storeKey = newMessageRef.key ?: return@ChatUserOutlineText
+                    val message = ChatModel(
+                        senderId = currentUserId,
+                        receiverId = uid,
+                        messageText = chatViewModel.currentMessage,
+                        storeKey = storeKey,
+                        timestamp = System.currentTimeMillis()
+                    )
+                    userViewModel.sendMessage(chatId, message)
+                    chatViewModel.currentMessage = ""
+                },
+            )
+        }
     }
     ) { paddingValues ->
 

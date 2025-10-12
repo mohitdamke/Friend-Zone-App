@@ -10,8 +10,12 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.mlkit.nl.smartreply.SmartReply
+import com.google.mlkit.nl.smartreply.TextMessage
+import com.zone.friendzone.data.model.ChatModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlin.collections.map
 
 class PeopleChatViewModel : ViewModel() {
     private val database = FirebaseDatabase.getInstance()
@@ -21,6 +25,8 @@ class PeopleChatViewModel : ViewModel() {
     val chatState: StateFlow<Chat> get() = _chatState
 
     var currentMessage by mutableStateOf("")
+
+    var smartReplies by mutableStateOf<List<String>>(emptyList())
 
     fun fetchMessages(chatId: String) {
         chatRef.child(chatId).child("messages").addValueEventListener(object : ValueEventListener {
@@ -37,6 +43,27 @@ class PeopleChatViewModel : ViewModel() {
                 // Handle error
             }
         })
+    }
+    fun generateSmartReplies(chatMessages: List<ChatModel>, currentUserId: String) {
+        if (chatMessages.isEmpty()) {
+            smartReplies = emptyList()
+            return
+        }
+        val conversation = chatMessages.map { message ->
+            if (message.senderId == currentUserId) {
+                TextMessage.createForLocalUser(message.messageText, message.timestamp)
+            } else {
+                TextMessage.createForRemoteUser(message.messageText, message.timestamp, message.senderId)
+            }
+        }
+
+        SmartReply.getClient().suggestReplies(conversation)
+            .addOnSuccessListener { result ->
+                smartReplies = result.suggestions.map { it.text }
+            }
+            .addOnFailureListener {
+                smartReplies = emptyList()
+            }
     }
 
 }
